@@ -10,7 +10,7 @@ While (alive)<br>
   }<br>
 ```
 
-# Hi there, my name is Karl 👋 
+# Hi, my name is Karl 👋 
 
 #### Husband | Father | Developer | & Loving Life!!
 
