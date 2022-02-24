@@ -1,13 +1,13 @@
 # karlkemistersheppard 
 
 ```html
-While (alive)<br>
-  {<br>
-  eat( );<br> 
-  code( );<br> 
-  sleep( );<br> 
-  repeat( );<br>
-  }<br>
+While (alive)
+  {
+  eat( ); 
+  code( );
+  sleep( ); 
+  repeat( );
+  }
 ```
 
 # Hi, my name is Karl 👋 
