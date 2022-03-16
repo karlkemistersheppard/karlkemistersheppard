@@ -1,0 +1,753 @@
+@import "variables"; //adding pathshell to main.scss
+@import "mixins"; //adding mixins to main.scss
+
+html {
+    font-size: 16px; //setting the base line font size to 16px so i can scale using rems
+}
+
+body {
+    background-color: $primarycolour; //setting background color
+    color: white; //setting basic font color
+    margin: 0; //making sure the html lines up to the page without defult margins
+    font-family: $fontstyle; //adding defined variable font style from imported font
+    margin-bottom: 64px; //adding defult 64px margin to the bottom of the html pages to give some space from from content to footer
+}
+
+//Header
+header {
+    @include header(); //i have used mixins to define the display flex for main containers throughout the document
+    background-color: $primarycolour;
+
+    .nav-bar {
+        width: 100%; //setting the margin width across the page for the header
+        height: auto;
+        z-index: 1; // used the z-index to create a top layer to ensure the header is always on top of the body elements
+        position: fixed; //fix the nav-bar to the top to make sure the user can always find a way home without scrolling
+        background-color: $primarycolour;
+        top: 0; //sets the nav to absolute 0 top margin
+
+        ul {
+            padding-left: 0;
+            margin: 0;
+        }
+        ul li {
+            width: 100%;
+            font-size: 1rem;
+            list-style-type: none;
+            font-size: 1rem;
+            font-family: $fontstyle;
+            font-weight: normal;
+            text-align: center; //align text to center of the container it sits in
+        }
+
+        a {
+            padding: 0;
+            background-color: $primarycolour; // using the variable created to call the primary color incase i want to change the theme later
+            text-decoration: none; //removes any dots, dashes ect on the font
+            color: $textcolour; // useing the variable font color
+            &:hover {
+                color: $hovercolour; // using the variable color created
+                background-color: $primarycolour;
+                font-size: 120%; // increases font size on pseudo :hover when it is activated so user on desktop can see when hovered
+                transition: 0.2s; // this applies a transition timer for the :hover effect- allows 0.2 second time frame
+            }
+        }
+        .gradient-text {
+            font-size: 1rem; // using rem allows for easier font size increase later when creating breakpoints for media q as it multiplies the existing preset font size created in the html tag 16px
+        }
+    }
+}
+
+//Main Logo
+
+.wrap {
+    height: 100%;
+    width: auto;
+}
+.gradient-text {
+    @include gradient-text(); // flex properties applied in mixin created
+    text-align: center;
+    font-family: $fontstyle;
+    background: linear-gradient(to right, #66fcf1, #ff0490, #8f00f1, #39ff14); // this creates the gradient color range for the effects on the logo created
+    background-size: 300% 300%; // this applies the background linear above- it allows for the colors to be more wide spread giving a better blend
+    animation: neon 2s ease-in-out infinite; // this animation allows for a 2 sec timer from the first color to the last- then sets infinate loop
+    background-clip: text; // this allows you to set the was the element sits in the container/ box.  By setting it to text this allows the gradient to sit behind the white space in the text allowing it to show through.
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 1); // sets the background color of the text before the :hover is activated
+    font-size: 10rem; // this multiplies the text 10x times 16px which was set in the html tag
+    transition: color 0.4s ease-in-out;
+    text-shadow: 2px 2px 10px #66fcf22c; // applies the text shadow to give the text the external glow
+    margin: 0px 0px 0px 0px; // setting the margin for the container at absolute 0 on all x/y axis
+    -webkit-text-stroke: 0.5px $bannercolour; // applies a outline on the text so you can see the left and right text font when not in :hover state
+
+    .reverse-letter {
+        transform: rotateY(180deg); // this reverses the middle letter so i can use text rather than img
+        color: $hovercolour;
+    }
+}
+
+.gradient-text:hover {
+    color: rgba(0, 0, 0, 0);
+}
+@keyframes neon { // this applies the direction to the gradients- when active the keyframe crease a back and forth motion giving a strobe effect
+    0% {
+        background-position: left;
+    }
+    15% {
+        background-position: right;
+    }
+    25% {
+        background-position: left;
+    }
+    50% {
+        background-position: right;
+    }
+    75% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+}
+
+.page-container {
+    @include page-container(); // display flex properties applied here for main container
+    @include page-margins(); // preset mixins to main container
+    width: 100%;
+    height: auto;
+    padding-top: 64px;
+
+    .main-heading {
+        font-size: 1.8rem;
+        width: auto;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .main-text {
+        text-align: center;
+        width: 80%;
+    }
+
+    .sub-heading {
+        font-size: 1.2rem;
+        width: auto;
+        text-align: left;
+        text-shadow: 2px 2px 5px #ff00ff;
+    }
+    .par-text {
+        font-size: 1rem;
+        text-align: left;
+        font-family: $fontstyle-para; // second google font variable introduced here
+        line-height: 140%;
+    }
+
+    ul {
+        font-size: 1rem;
+    }
+    .resume-icon {
+        width: 3rem;
+    }
+    .code-logo {
+        background-color: white;
+        border-radius: 20%;
+        width: 8rem;
+        &:hover {
+            transform: scale(1.2); // increased the size of the icon when hovered to show the user its interactive
+        }
+    }
+    .codecademy-logo {
+        background-color: white;
+        border-radius: 20px;
+        width: 12rem;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+    p.learn-more {
+        margin: 0;
+        font-size: 0.8rem;
+    }
+    .arrow-neon {
+        width: 40px;
+        transform: rotate(180deg); // rotates the icon 180 deg, as the stock image was pointing in the opposite direction
+        align-content: center;
+    }
+    img.blog-img1 {
+        height: auto;
+        width: 100%;
+    }
+    .hello-pic {
+        height: auto;
+        max-width: 80%;
+        padding: 0;
+    }
+
+    input[type="text"],
+    select,
+    textarea { // this allows you to select the text area and modify the elements atributes inside the input field
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px; // applies rounding to the text input so i smoothes the internal edges inside the field
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        font-size: 0.8rem;
+        font-family: $fontstyle;
+    }
+
+    input[type="submit"] {
+        width: 60px;
+        height: 30px;
+        border-radius: 10%;
+        margin-left: auto;
+        padding: 4px 8px 4px 8px; // applied padding to the submit button so its more user friendly
+        background-color: $bannercolour;
+        font-size: 0.7rem;
+        &:hover {
+            background-color: black;
+            color: white;
+            box-shadow: 2px 2px 16px #ff00ff;
+            border: 1px solid $bannercolour; // applied a :hover state to the element to give the ueser some interaction effects
+        }
+    }
+
+    input[type="text"],
+    textarea {
+        border-radius: 20px;
+        border-color: $bannercolour;
+        border: 1px solid $bannercolour;
+        background-color: $primarycolour;
+        color: white;
+        outline: none;
+        &:hover {
+            color: $hovercolour;
+            box-shadow: 4px 4px 24px #ff00ff; // adds box shadow to the text area when :hover is active
+        }
+    }
+
+    input:focus {
+        outline: none; // removes the line nested inside the input area- creates a clean visual finish
+    }
+    .contact-form {
+        border-radius: 5px;
+        background-color: $primarycolour;
+        display: inline-flex; // applies the content to inline row display
+        width: 70%; // changes the width of the contact form so it doesnt span across the whole page. using % allows the page to respond to display sizes auto
+        margin-bottom: 24px;
+    }
+    label {
+        font-size: 0.8rem;
+    }
+
+    .blog-container {
+        @include blog-container();
+        border-radius: 20px;
+        border-color: $bannercolour;
+        border: 1px solid $bannercolour;
+        padding: 24px;
+        margin: 5%;
+        &:hover {
+            box-shadow: 2px 2px 16px #ff00ff;
+            transform: scale(1.1);
+        }
+
+        .blog-text {
+            @include blog-text();
+        }
+        .blog-heading {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        time {
+            font-size: 0.8rem;
+        }
+        p {
+            font-size: 1rem;
+        }
+        a {
+            text-align: right;
+        }
+        p.blog-ul-main {
+            font-size: 0.4rem;
+        }
+        p.blog-li {
+            font-size: 0.7rem;
+        }
+
+        .blog-button {
+            width: auto;
+            border-radius: 10%;
+            margin-left: auto;
+            padding: 4px 8px 4px 8px;
+            background-color: $bannercolour;
+            font-size: 0.7rem;
+            text-decoration: none;
+            color: black;
+            &:hover {
+                background-color: black;
+                color: white;
+                box-shadow: 2px 2px 16px #ff00ff;
+                border: 1px solid $bannercolour;
+            }
+        }
+
+        .tool-img-container {
+            @include tool-img-container();
+            padding: 5px 5px 5px 5px;
+
+            .tool-img {
+                width: 2.5rem;
+            }
+        }
+    }
+}
+
+div p.copyright{ // adding the copyright to the bottom of the page on index.html
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 0.5rem;
+    color: rgb(137, 128, 128);
+}
+
+.contact-container{ // applied css properties to the mobile and email on the main contact page just incase the user doesnt use the direct link icons in the footer
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    padding: 30px 0px 30px 0px;
+    .contact{
+        width: 40px;
+    }
+    p{
+        font-size: 0.7rem;
+    }
+
+}
+
+
+#footer-bar {
+    @include footer-container();
+    height: auto;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: $bannercolour;
+
+    ul {
+        list-style-type: none; // removes the list ul styling so it has no dots applied on screen
+        padding: 0; // allows for absolute zero padding to tighten up space
+        margin-top: 0; // sets the top margin to zero in the footer container
+        margin-bottom: 0; // set the bottom margin to zero in the footer container
+    }
+    li {
+        float: left; // floats the footer to absolute left so its left aligned to page at all times
+    }
+    .social {
+        height: auto;
+        width: 30px; // allows you to change the icon size which works great with using auto for the height
+        color: black;
+        margin: 8px; // creates 8px margin around the entire icon
+        &:hover {
+            transform: rotate(40deg); // rotates the icon on :hover effect 40 deg to the right for ux interactions 
+        }
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) { // this is media q breakpoint once the user screen min width reaches 576px and ranges to 768px
+    .page-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+
+        .page-container .main-heading {
+            font-size: 1.7rem;
+            width: 50%;
+        }
+        .main-text {
+            font-size: 2rem;
+        }
+        .sub-heading {
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        .par-text {
+            font-size: 1rem;
+        }
+        ul {
+            font-size: 1.2rem;
+        }
+        .resume-icon {
+            width: 4rem;
+        }
+        p.learn-more {
+            font-size: 1rem;
+        }
+        .arrow-neon {
+            width: 60px;
+        }
+        .hello-pic {
+            max-width: 40%;
+        }
+
+        .blog-container {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            width: 60%;
+
+            .blog-heading {
+                font-size: 2rem;
+            }
+            .time {
+                font-size: 0.8rem;
+            }
+            p.blog-li {
+                font-size: 0.8rem;
+            }
+
+            .blog-button {
+                font-size: 1rem;
+            }
+
+            .tool-img-container {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding: 5px 5px 5px 5px;
+
+                .tool-img {
+                    width: 4rem;
+                }
+            }
+
+            input[type="text"],
+            select,
+            textarea {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            input[type="submit"] {
+                font-size: 1rem;
+                width: 60px;
+                height: auto;
+            }
+
+            .contact-form {
+                width: 40%;
+            }
+
+            label {
+                font-size: 1rem;
+            }
+        }
+
+        #footer-bar {
+            .social {
+                width: 30px;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) { // this is media q breakpoint once the user screen min width reaches 769px and ranges to 992px
+    header .nav-bar ul {
+        display: flex;
+        flex-direction: row; // this is the transition from column nav bar to flex direction row across the top of the page to create more viewpoint space for UX
+        align-items: center;
+        height: 50px;
+
+        li {
+            font-size: 1.5rem;
+        }
+        .gradient-text {
+            font-size: 2rem;
+        }
+    }
+
+    .page-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+
+        .main-heading {
+            font-size: 1.8rem;
+            width: 40%;
+        }
+        .main-text {
+            width: 40%;
+            margin-top: 150px;
+            margin-bottom: 100px;
+        }
+        .sub-heading {
+            font-size: 1.2rem;
+        }
+        .par-text {
+            font-size: 1rem;
+        }
+        ul {
+            font-size: 1.3rem;
+        }
+        .resume-icon {
+            width: 6rem;
+        }
+        p.learn-more {
+            font-size: 1.3rem;
+        }
+        .arrow-neon {
+            width: 60px;
+        }
+        p {
+            font-size: 0.8rem;
+        }
+
+        .wrap {
+            .gradient-text {
+                font-size: 15rem;
+                margin: 50px 0px 50px 0px;
+            }
+        }
+
+        #footer-bar {
+            .social {
+                width: 40px;
+            }
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            font-size: 1rem;
+            width: 80px;
+            height: auto;
+        }
+
+        .contact-form {
+            width: 60%;
+        }
+        label {
+            font-size: 1rem;
+        }
+
+        .blog-container {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            width: 30%;
+
+            .blog-heading {
+                font-size: 1.5rem;
+            }
+            time {
+                font-size: 0.8rem;
+            }
+            p.blog-li {
+                font-size: 0.8rem;
+            }
+
+            .blog-button {
+                font-size: 1.2rem;
+            }
+
+            .tool-img-container {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding: 5px 5px 5px 5px;
+
+                .tool-img {
+                    width: 3.5rem;
+                }
+            }
+
+            input[type="text"],
+            select,
+            textarea {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            input[type="submit"] {
+                font-size: 1rem;
+                width: 80px;
+                height: auto;
+            }
+
+            .contact-form {
+                width: 50%;
+            }
+            label {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 2500px) { // this is media q breakpoint once the user screen min width reaches 993px and ranges to 2500px
+    header .nav-bar ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 50px;
+
+        li {
+            font-size: 1.5rem;
+        }
+        .gradient-text {
+            font-size: 2rem;
+        }
+    }
+
+    .page-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+
+        .main-heading {
+            font-size: 2.5rem;
+            width: 50%;
+        }
+        .main-text {
+            width: 60%;
+
+            p {
+                font-size: 1.5rem;
+            }
+        }
+        .sub-heading {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .par-text {
+            font-size: 1.4rem;
+        }
+        ul {
+            font-size: 1.4rem;
+        }
+        .resume-icon {
+            width: 6rem;
+        }
+        p.learn-more {
+            font-size: 1.2rem;
+        }
+        .arrow-neon {
+            width: 60px;
+        }
+        p.par-text {
+            font-size: 1.2rem;
+            padding: 10%;
+        }
+
+        .wrap {
+            .gradient-text {
+                font-size: 25rem;
+                margin: 50px 0px 50px 0px;
+            }
+        }
+
+        #footer-bar {
+            .social {
+                width: 60px;
+            }
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            font-size: 1rem;
+            width: 80px;
+            height: auto;
+        }
+
+        .contact-form {
+            width: 50%;
+        }
+
+        .blog-container {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            width: 30%;
+
+            .blog-heading {
+                font-size: 2rem;
+                margin-top: 20px;
+            }
+            time {
+                font-size: 1.8rem;
+                margin-top: 50px;
+            }
+            p.blog-li {
+                font-size: 1rem;
+            }
+
+            p.par-text {
+                font-size: 1.2rem;
+                padding: 0;
+            }
+            .blog-button {
+                font-size: 1.6rem;
+            }
+
+            .tool-img-container {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                padding: 10px 10px 10px 10px;
+
+                .tool-img {
+                    width: 4rem;
+                }
+            }
+            p {
+                font-size: 1.2rem;
+            }
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            font-size: 1rem;
+            width: 80px;
+            height: auto;
+        }
+
+        .contact-form {
+            width: 30%;
+        }
+        label {
+            font-size: 0.8rem;
+        }
+    }
+}
+
+//LANDSCAPE Q
+
+@media screen and (min-width: 320px) and (max-width: 575px) and (orientation: landscape) { // this is media q breakpoint once the user screen is rotated on mobile devices to increase viewport space.
+    nav.nav-bar ul {
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
